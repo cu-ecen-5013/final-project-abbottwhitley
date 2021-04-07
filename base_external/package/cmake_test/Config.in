@@ -1,0 +1,5 @@
+
+config BR2_PACKAGE_CMAKE_TEST
+	bool "CMAKE_TEST"
+	help
+	  test code to sample cmake with buildroot 

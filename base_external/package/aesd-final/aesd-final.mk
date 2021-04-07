@@ -1,12 +1,11 @@
 ##############################################################
 #
-# AESD-ASSIGNMENTS
+# AESD-FINAL
 #
 ##############################################################
 
 #TODO: Fill up the contents below in order to reference your assignment 3 git contents
-#AESD_ASSIGNMENTS_VERSION=aa06a74151ec998196cfb07b9c0a5f2acba76711
-AESD_FINAL_VERSION=4c79146fbd6b061015b1dd42999b3f9a6ed2012c
+AESD_FINAL_VERSION=244846f503a54dd70331349375ef4d03cb406bad
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
@@ -37,6 +36,7 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(TOPDIR)/../base_external/rootfs_overlay/network/interfaces ${TARGET_DIR}/etc/network
 	$(INSTALL) -m 0755 package/busybox/S10mdev ${TARGET_DIR}/etc/init.d/S10mdev
 	$(INSTALL) -m 0755 package/busybox/mdev.conf ${TARGET_DIR}/etc/mdev.conf
+        $(INSTALL) -m 0755 $(@D)/opencvcam/capture $(TARGET_DIR)/usr/bin/
 #	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/
 endef
 
