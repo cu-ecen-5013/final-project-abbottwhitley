@@ -5,16 +5,18 @@
 ##############################################################
 
 #TODO: Fill up the contents below in order to reference your assignment 3 git contents
-AESD_FINAL_VERSION=317c618b23147c89c94106ee0bb3fa8830ffc27d
+#AESD_FINAL_VERSION=317c618b23147c89c94106ee0bb3fa8830ffc27d
+AESD_FINAL_VERSION=1
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
-AESD_FINAL_SITE = git@github.com:cu-ecen-5013/assignment-3-abbottwhitley.git
-AESD_FINAL_SITE_METHOD = git
-AESD_FINAL_GIT_SUBMODULES = YES
 
-#PKG_CONFIG_PATH=$(TOPDIR)/output/build/opencv3-3.4.13/buildroot-build/unix-install/
-#LD_LIBRARY_PATH=$(TOPDIR)/output/build/opencv3-3.4.13/buildroot-build/lib
+#AESD_FINAL_SITE = git@github.com:cu-ecen-5013/assignment-3-abbottwhitley.git
+#AESD_FINAL_SITE_METHOD = git
+#AESD_FINAL_GIT_SUBMODULES = YES
+
+AESD_FINAL_SITE = $(TOPDIR)/../../../assignment-3-abbottwhitley
+AESD_FINAL_SITE_METHOD = local
 
 define AESD_FINAL_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D) all
@@ -36,8 +38,12 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(TOPDIR)/../base_external/rootfs_overlay/network/interfaces ${TARGET_DIR}/etc/network
 	$(INSTALL) -m 0755 package/busybox/S10mdev ${TARGET_DIR}/etc/init.d/S10mdev
 	$(INSTALL) -m 0755 package/busybox/mdev.conf ${TARGET_DIR}/etc/mdev.conf
-        $(INSTALL) -m 0755 $(@D)/opencvcam/capture $(TARGET_DIR)/usr/bin/
-	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/
+
+	$(INSTALL) -d 0755 $(@D)/opencv $(TARGET_DIR)/usr/bin/opencv
+	$(INSTALL) -d 0755 $(@D)/opencv/xml $(TARGET_DIR)/usr/bin/opencv/xml
+        $(INSTALL) -m 0755 $(@D)/opencvcam/capture $(TARGET_DIR)/usr/bin/opencv
+	$(INSTALL) -m 0755 $(@D)/opencv/xml/* $(TARGET_DIR)/usr/bin/opencv/xml
+	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/opencv
 #	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/
 endef
 
