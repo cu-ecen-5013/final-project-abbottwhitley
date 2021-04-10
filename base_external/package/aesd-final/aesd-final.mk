@@ -12,7 +12,7 @@ AESD_FINAL_VERSION=1
 #AESD_FINAL_SITE_METHOD = git
 #AESD_FINAL_GIT_SUBMODULES = YES
 
-AESD_FINAL_SITE = $(TOPDIR)/../../FINAL/opencv-monitoring-system
+AESD_FINAL_SITE = $(TOPDIR)/../../opencv-monitoring-system
 AESD_FINAL_SITE_METHOD = local
 
 define AESD_FINAL_BUILD_CMDS
@@ -33,6 +33,11 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/opencv/xml/* $(TARGET_DIR)/usr/bin/opencv/xml
 	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/opencv
 	$(INSTALL) -m 0755 $(@D)/opencv_stream/server/server $(TARGET_DIR)/usr/bin/opencv
+	$(INSTALL) -d 0755 $(@D)/opencvPy/webStream $(TARGET_DIR)/usr/bin/opencvPy/webStream
+	$(INSTALL) -d 0755 $(@D)/opencvPy/webStream/templates $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates
+	$(INSTALL) -m 0755 $(@D)/opencvPy/webStream/main.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
+	$(INSTALL) -m 0755 $(@D)/opencvPy/webStream/camera.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
+	$(INSTALL) -m 0755 $(@D)/opencvPy/webStream/templates/index.html $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates/index.html
 endef
 
 $(eval $(generic-package))
