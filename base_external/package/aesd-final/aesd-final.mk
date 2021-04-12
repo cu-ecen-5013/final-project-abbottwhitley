@@ -12,7 +12,7 @@ AESD_FINAL_VERSION=1
 #AESD_FINAL_SITE_METHOD = git
 #AESD_FINAL_GIT_SUBMODULES = YES
 
-AESD_FINAL_SITE = $(TOPDIR)/../../FINAL/opencv-monitoring-system
+AESD_FINAL_SITE = $(TOPDIR)/../../opencv-monitoring-system
 AESD_FINAL_SITE_METHOD = local
 
 define AESD_FINAL_BUILD_CMDS
