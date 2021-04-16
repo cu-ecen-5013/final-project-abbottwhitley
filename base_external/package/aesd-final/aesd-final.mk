@@ -16,9 +16,8 @@ AESD_FINAL_SITE = $(TOPDIR)/../../opencv-monitoring-system
 AESD_FINAL_SITE_METHOD = local
 
 define AESD_FINAL_BUILD_CMDS
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/opencvcam all
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/opencv all
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/opencv_stream/server all
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/opencv_stream/server/serverSocket all
 endef
 
 
@@ -27,19 +26,20 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(TOPDIR)/../base_external/rootfs_overlay/network/interfaces ${TARGET_DIR}/etc/network
 	$(INSTALL) -m 0755 package/busybox/S10mdev ${TARGET_DIR}/etc/init.d/S10mdev
 	$(INSTALL) -m 0755 package/busybox/mdev.conf ${TARGET_DIR}/etc/mdev.conf
+	# Face detection
 	$(INSTALL) -d 0755 $(@D)/opencv $(TARGET_DIR)/usr/bin/opencv
 	$(INSTALL) -d 0755 $(@D)/opencv/xml $(TARGET_DIR)/usr/bin/opencv/xml
-        $(INSTALL) -m 0755 $(@D)/opencvcam/capture $(TARGET_DIR)/usr/bin/opencv
 	$(INSTALL) -m 0755 $(@D)/opencv/xml/* $(TARGET_DIR)/usr/bin/opencv/xml
 	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/opencv
-	$(INSTALL) -m 0755 $(@D)/opencv_stream/server/server $(TARGET_DIR)/usr/bin/opencv
-        $(INSTALL) -d 0755 $(@D)/opencvPy/webStreamSock $(TARGET_DIR)/usr/bin/opencvPy/webStream
-        $(INSTALL) -d 0755 $(@D)/opencvPy/webStreamSock/templates $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates
-        $(INSTALL) -m 0755 $(@D)/opencvPy/webStreamSock/main.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
-        $(INSTALL) -m 0755 $(@D)/opencvPy/webStreamSock/camera.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
-	$(INSTALL) -m 0755 $(@D)/opencvPy/webStreamSock/server.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
-        $(INSTALL) -m 0755 $(@D)/opencvPy/webStreamSock/templates/index.html $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates/index.html
-
+	# Video Streaming Service
+	# Python
+        $(INSTALL) -d 0755 $(@D)/opencv_stream/client/python/webStream $(TARGET_DIR)/usr/bin/opencvPy/webStream
+        $(INSTALL) -d 0755 $(@D)/opencv_stream/client/python/webStream/templates $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates
+        $(INSTALL) -m 0755 $(@D)/opencv_stream/client/python/webStream/main.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
+        $(INSTALL) -m 0755 $(@D)/opencv_stream/client/python/webStream/camera.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
+        $(INSTALL) -m 0755 $(@D)/opencv_stream/client/python/webStream/templates/index.html $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates/index.html
+	# C++
+	$(INSTALL) -m 0755 $(@D)/opencv_stream/server/serverSocket/server $(TARGET_DIR)/usr/bin/opencv
 endef
 
 $(eval $(generic-package))
