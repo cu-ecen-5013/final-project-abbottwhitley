@@ -17,7 +17,8 @@ AESD_FINAL_SITE_METHOD = local
 
 define AESD_FINAL_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/opencv all
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/opencv_stream/server/serverSocket all
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/camera_app/cpp all
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/controller_app/cpp all
 endef
 
 
@@ -31,15 +32,28 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	$(INSTALL) -d 0755 $(@D)/opencv/xml $(TARGET_DIR)/usr/bin/opencv/xml
 	$(INSTALL) -m 0755 $(@D)/opencv/xml/* $(TARGET_DIR)/usr/bin/opencv/xml
 	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/opencv
-	# Video Streaming Service
-	# Python
-        $(INSTALL) -d 0755 $(@D)/opencv_stream/client/python/webStream $(TARGET_DIR)/usr/bin/opencvPy/webStream
-        $(INSTALL) -d 0755 $(@D)/opencv_stream/client/python/webStream/templates $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates
-        $(INSTALL) -m 0755 $(@D)/opencv_stream/client/python/webStream/main.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
-        $(INSTALL) -m 0755 $(@D)/opencv_stream/client/python/webStream/camera.py $(TARGET_DIR)/usr/bin/opencvPy/webStream
-        $(INSTALL) -m 0755 $(@D)/opencv_stream/client/python/webStream/templates/index.html $(TARGET_DIR)/usr/bin/opencvPy/webStream/templates/index.html
-	# C++
-	$(INSTALL) -m 0755 $(@D)/opencv_stream/server/serverSocket/server $(TARGET_DIR)/usr/bin/opencv
+	# ~~~ Camera Applications ~~~
+	# Video Streaming Server (Python / HTML)
+	$(INSTALL) -d 0755 $(@D)/camera_app/python/ $(TARGET_DIR)/usr/bin/opencv/camera_app/python
+        $(INSTALL) -d 0755 $(@D)/camera_app/python/templates $(TARGET_DIR)/usr/bin/opencv/camera_app/python/templates
+        $(INSTALL) -m 0755 $(@D)/camera_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
+        $(INSTALL) -m 0755 $(@D)/camera_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
+        $(INSTALL) -m 0755 $(@D)/camera_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/camera_app/python/templates
+	# Video Streaming Server (C++)
+	$(INSTALL) -d 0755 $(@D)/camera_app/cpp/ $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp
+	$(INSTALL) -m 0755 $(@D)/camera_app/cpp/server $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp
+
+	# ~~~ Controller Applications ~~~
+        # Video Streaming Server (Python / HTML)
+        $(INSTALL) -d 0755 $(@D)/controller_app/python/ $(TARGET_DIR)/usr/bin/opencv/controller_app/python
+        $(INSTALL) -d 0755 $(@D)/controller_app/python/templates $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
+        $(INSTALL) -m 0755 $(@D)/controller_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
+        $(INSTALL) -m 0755 $(@D)/controller_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
+        $(INSTALL) -m 0755 $(@D)/controller_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
+	# Video Streaming Client (C++)
+	$(INSTALL) -d 0755 $(@D)/controller_app/cpp/ $(TARGET_DIR)/usr/bin/opencv/controller_app/cpp
+	$(INSTALL) -m 0755 $(@D)/controller_app/cpp/client $(TARGET_DIR)/usr/bin/opencv/controller_app/cpp
+
 endef
 
 $(eval $(generic-package))
