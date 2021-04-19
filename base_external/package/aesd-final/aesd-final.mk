@@ -16,7 +16,6 @@ AESD_FINAL_SITE = $(TOPDIR)/../../opencv-monitoring-system
 AESD_FINAL_SITE_METHOD = local
 
 define AESD_FINAL_BUILD_CMDS
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/opencv all
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/camera_app/cpp all
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/controller_app/cpp all
 endef
@@ -27,11 +26,6 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(TOPDIR)/../base_external/rootfs_overlay/network/interfaces ${TARGET_DIR}/etc/network
 	$(INSTALL) -m 0755 package/busybox/S10mdev ${TARGET_DIR}/etc/init.d/S10mdev
 	$(INSTALL) -m 0755 package/busybox/mdev.conf ${TARGET_DIR}/etc/mdev.conf
-	# Face detection
-	$(INSTALL) -d 0755 $(@D)/opencv $(TARGET_DIR)/usr/bin/opencv
-	$(INSTALL) -d 0755 $(@D)/opencv/xml $(TARGET_DIR)/usr/bin/opencv/xml
-	$(INSTALL) -m 0755 $(@D)/opencv/xml/* $(TARGET_DIR)/usr/bin/opencv/xml
-	$(INSTALL) -m 0755 $(@D)/opencv/facedetect $(TARGET_DIR)/usr/bin/opencv
 	# ~~~ Camera Applications ~~~
 	# Video Streaming Server (Python / HTML)
 	$(INSTALL) -d 0755 $(@D)/camera_app/python/ $(TARGET_DIR)/usr/bin/opencv/camera_app/python
@@ -39,9 +33,12 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
         $(INSTALL) -m 0755 $(@D)/camera_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
         $(INSTALL) -m 0755 $(@D)/camera_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
         $(INSTALL) -m 0755 $(@D)/camera_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/camera_app/python/templates
-	# Video Streaming Server (C++)
+	# Video Streaming Server w/Face detection (C++)
 	$(INSTALL) -d 0755 $(@D)/camera_app/cpp/ $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp
 	$(INSTALL) -m 0755 $(@D)/camera_app/cpp/server $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp
+	# Face detection xml files
+	$(INSTALL) -d 0755 $(@D)/camera_app/cpp/xml $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp/xml
+	$(INSTALL) -m 0755 $(@D)/camera_app/cpp/xml/* $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp/xml
 
 	# ~~~ Controller Applications ~~~
         # Video Streaming Server (Python / HTML)

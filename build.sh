@@ -19,6 +19,7 @@ echo AESD_MODIFIED_DEFCONFIG: ${AESD_MODIFIED_DEFCONFIG}
 echo AESD_MODIFIED_DEFCONFIG_REL_BUILDROOT: ${AESD_MODIFIED_DEFCONFIG_REL_BUILDROOT}
 echo ############################################################
 
+rm -Rf buildroot/output/build/aesd-final-1
 
 if [ ! -e buildroot/.config ]
 then
