@@ -29,24 +29,27 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	# ~~~ Camera Applications ~~~
 	# Video Streaming Server (Python / HTML)
 	$(INSTALL) -d 0755 $(@D)/camera_app/python/ $(TARGET_DIR)/usr/bin/opencv/camera_app/python
-        $(INSTALL) -d 0755 $(@D)/camera_app/python/templates $(TARGET_DIR)/usr/bin/opencv/camera_app/python/templates
-        $(INSTALL) -m 0755 $(@D)/camera_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
-        $(INSTALL) -m 0755 $(@D)/camera_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
-        $(INSTALL) -m 0755 $(@D)/camera_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/camera_app/python/templates
+    $(INSTALL) -d 0755 $(@D)/camera_app/python/templates $(TARGET_DIR)/usr/bin/opencv/camera_app/python/templates
+    $(INSTALL) -m 0755 $(@D)/camera_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
+    $(INSTALL) -m 0755 $(@D)/camera_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/camera_app/python
+    $(INSTALL) -m 0755 $(@D)/camera_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/camera_app/python/templates
+    $(INSTALL) -m 0755 $(@D)/camera_app/python/pyServer-start-stop ${TARGET_DIR}/etc/init.d/S99_pyServer-start-stop
+
 	# Video Streaming Server w/Face detection (C++)
 	$(INSTALL) -d 0755 $(@D)/camera_app/cpp/ $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp
 	$(INSTALL) -m 0755 $(@D)/camera_app/cpp/server $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp
+	$(INSTALL) -m 0755 $(@D)/camera_app/cpp/opencvServer-start-stop $(TARGET_DIR)/etc/init.d/S98_opencvServer-start-stop
 	# Face detection xml files
 	$(INSTALL) -d 0755 $(@D)/camera_app/cpp/xml $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp/xml
 	$(INSTALL) -m 0755 $(@D)/camera_app/cpp/xml/* $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp/xml
 
 	# ~~~ Controller Applications ~~~
-        # Video Streaming Server (Python / HTML)
-        $(INSTALL) -d 0755 $(@D)/controller_app/python/ $(TARGET_DIR)/usr/bin/opencv/controller_app/python
-        $(INSTALL) -d 0755 $(@D)/controller_app/python/templates $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
-        $(INSTALL) -m 0755 $(@D)/controller_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
-        $(INSTALL) -m 0755 $(@D)/controller_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
-        $(INSTALL) -m 0755 $(@D)/controller_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
+    # Video Streaming Server (Python / HTML)
+    $(INSTALL) -d 0755 $(@D)/controller_app/python/ $(TARGET_DIR)/usr/bin/opencv/controller_app/python
+    $(INSTALL) -d 0755 $(@D)/controller_app/python/templates $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
+    $(INSTALL) -m 0755 $(@D)/controller_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
+    $(INSTALL) -m 0755 $(@D)/controller_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
+    $(INSTALL) -m 0755 $(@D)/controller_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
 	# Video Streaming Client (C++)
 	$(INSTALL) -d 0755 $(@D)/controller_app/cpp/ $(TARGET_DIR)/usr/bin/opencv/controller_app/cpp
 	$(INSTALL) -m 0755 $(@D)/controller_app/cpp/client $(TARGET_DIR)/usr/bin/opencv/controller_app/cpp
