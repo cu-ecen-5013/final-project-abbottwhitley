@@ -4,16 +4,14 @@
 #
 ##############################################################
 
-#TODO: Fill up the contents below in order to reference your assignment 3 git contents
-#AESD_FINAL_VERSION=317c618b23147c89c94106ee0bb3fa8830ffc27d
-AESD_FINAL_VERSION=1
+AESD_FINAL_VERSION=81ad1c9591fb3354821891d32e1a401723cb91cc
+AESD_FINAL_SITE = git@github.com:cu-ecen-5013/opencv-monitoring-system.git
+AESD_FINAL_SITE_METHOD = git
+AESD_FINAL_GIT_SUBMODULES = YES
 
-#AESD_FINAL_SITE = git@github.com:cu-ecen-5013/opencv-monitoring-system.git
-#AESD_FINAL_SITE_METHOD = git
-#AESD_FINAL_GIT_SUBMODULES = YES
-
-AESD_FINAL_SITE = $(TOPDIR)/../../opencv-monitoring-system
-AESD_FINAL_SITE_METHOD = local
+#AESD_FINAL_VERSION=1
+#AESD_FINAL_SITE = $(TOPDIR)/../../opencv-monitoring-system
+#AESD_FINAL_SITE_METHOD = local
 
 define AESD_FINAL_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/camera_app/cpp all
@@ -42,17 +40,6 @@ define AESD_FINAL_INSTALL_TARGET_CMDS
 	# Face detection xml files
 	$(INSTALL) -d 0755 $(@D)/camera_app/cpp/xml $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp/xml
 	$(INSTALL) -m 0755 $(@D)/camera_app/cpp/xml/* $(TARGET_DIR)/usr/bin/opencv/camera_app/cpp/xml
-
-	# ~~~ Controller Applications ~~~
-    # Video Streaming Server (Python / HTML)
-    $(INSTALL) -d 0755 $(@D)/controller_app/python/ $(TARGET_DIR)/usr/bin/opencv/controller_app/python
-    $(INSTALL) -d 0755 $(@D)/controller_app/python/templates $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
-    $(INSTALL) -m 0755 $(@D)/controller_app/python/main.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
-    $(INSTALL) -m 0755 $(@D)/controller_app/python/camera.py $(TARGET_DIR)/usr/bin/opencv/controller_app/python
-    $(INSTALL) -m 0755 $(@D)/controller_app/python/templates/index.html $(TARGET_DIR)/usr/bin/opencv/controller_app/python/templates
-	# Video Streaming Client (C++)
-	$(INSTALL) -d 0755 $(@D)/controller_app/cpp/ $(TARGET_DIR)/usr/bin/opencv/controller_app/cpp
-	$(INSTALL) -m 0755 $(@D)/controller_app/cpp/client $(TARGET_DIR)/usr/bin/opencv/controller_app/cpp
 
 endef
 
